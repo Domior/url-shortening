@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { selectLinks } from '../../store/slice/linkSlice';
 
 import Button from '../Button';
@@ -14,11 +16,17 @@ const Shortens = () => {
     <section className={classes.Shortens}>
       <div className="container">
         {links.map(item => (
-          <div key={item.code} className={classes.item}>
-            <span>{item.original_link}</span>
-            <span>{item.full_short_link2}</span>
-            <Button variant="square">Copy</Button>
-          </div>
+          <AnimatePresence key={item.code}>
+            <motion.div
+              className={classes.item}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+            >
+              <span>{item.original_link}</span>
+              <span>{item.full_short_link2}</span>
+              <Button variant="square">Copy</Button>
+            </motion.div>
+          </AnimatePresence>
         ))}
       </div>
     </section>
