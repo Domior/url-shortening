@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
+import { selectLinks } from '../../store/slice/linkSlice';
+
 import Button from '../Button';
+
 import classes from './Shortens.module.scss';
 
 const Shortens = () => {
-  const links = [];
+  const links = useSelector(selectLinks);
 
   if (!links?.length) return null;
 
